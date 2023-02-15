@@ -12,9 +12,9 @@ tess_path = os.path.join(currentDirectory, 'Tesseract-OCR')
 os.environ["PATH"] += os.pathsep + tess_path
 os.environ["TESSDATA_PREFIX"] = os.path.join(tess_path, 'tessdata')
 
-# ※があるかないかで条件分岐するため初期値宣言
+
 def tesseract_ocr(image_path):
-    # OCRツールを指定　（「Tesseract」が[0]に収められていた）
+
     tools = pyocr.get_available_tools()
     if len (tools) == 0:
         print ("No Tesseract OCR tool found")
@@ -22,14 +22,14 @@ def tesseract_ocr(image_path):
     tool = tools[0]
     # langs = tool.get_available_languages()
 
-    # 画像を認識
+ 
     with Image.open(image_path) as im1:
-        # ビルダーの設定
+      
         builder = pyocr.builders.LineBoxBuilder(tesseract_layout=6)
-        # テキスト抽出
+     
         res = tool.image_to_string(
             im1,
-            lang= 'digits_comma', #lang_setting,  # 言語を指定
+            lang= 'digits_comma', #lang_setting, 
             builder=builder
         )
     return res
